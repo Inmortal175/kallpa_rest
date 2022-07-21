@@ -4,6 +4,8 @@ from django.contrib import admin
 
 from .models import dispositivo, marca, modelo, role, estado
 
+from .Models.productos import Presentacion_Producto
+
 # Register your models here.
 @admin.register(dispositivo)
 class DispositivoAdmin(admin.ModelAdmin):
@@ -24,4 +26,8 @@ class roleAdmin(admin.ModelAdmin):
 @admin.register(estado)
 class estadoAdmin(admin.ModelAdmin):
   list_display = ['id', 'nombre_estado']
+
+@admin.register(Presentacion_Producto)
+class Presentacion_ProductoAdmin(admin.ModelAdmin):
+  list_display = ['id', 'img_normal', 'img_miniatura']
 
