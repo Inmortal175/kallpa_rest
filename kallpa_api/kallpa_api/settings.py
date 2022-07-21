@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from datetime import timedelta
+from msilib.schema import Media
 from pathlib import Path
+from re import A
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-(rm^kiau$h=d8dv7@d&&xi=dd=(za36z@tv66ey@ph(_i#54a)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'Rup3rt_h4ck4iu']
 
 
 # Application definition
@@ -40,6 +43,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'api_rest',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_yasg',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4200',
+    'http://localhost:4200', 'http://Rup3rt_h4ck4iu:8000'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -121,12 +127,24 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# django rest framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes = 60), #duracion del access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(days = 7), #duracion del refresh token
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 
@@ -136,6 +154,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATIC_ROOT = './static/'
+
 STATIC_URL = 'static/'
 
 # Default primary key field type
@@ -144,3 +164,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_OGIGINS = True
+
+AUTH_USER_MODEL = 'user.User'
+
+# Media targeting settings
+MEDIA_URL = 'media/'
+MEDIA_ROOT = './static/media'
