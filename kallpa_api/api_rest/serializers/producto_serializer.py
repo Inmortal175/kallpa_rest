@@ -8,9 +8,9 @@ class ProductoSerializer(ModelSerializer):
   class Meta:
     model = Producto
     fields=['id','dispositivo_ID', 'marca_ID', 'modelo_ID', 'nombre_producto', 'precio', 
-     'cantidad', 'descripcion', 'aplica_puntos', 'cantidad_puntos', 'en_oferta',
+     'cantidad', 'descripcion', 'puntos_aplicados', 'aplica_puntos', 'cantidad_puntos', 'en_oferta',
      'descuento', 'caducidad_puntos', 'caducidad_oferta', 'envio_gratis', 'evento_ID', 
-     'presentacion_Producto_ID', 'tipo_producto_ID', 'es_elimidado']
+     'presentacion_Producto_ID', 'tipo_producto_ID', 'es_elimidado'] #que gran cambio
 
 class ProductoPersonalizadoSerializer(ModelSerializer):
   class Meta:
