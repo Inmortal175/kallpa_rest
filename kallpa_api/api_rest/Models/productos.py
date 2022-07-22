@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 # others imports
@@ -28,7 +29,8 @@ class Producto(models.Model):
   nombre_producto  = models.CharField(max_length=255, null=False)
   descripcion      = models.TextField(null=True)
   precio           = models.FloatField(null= False)
-  cantidad         = models.IntegerField(null= True)
+  cantidad         = models.IntegerField(null=False)
+  puntos_aplicados = models.IntegerField(null= True)
   aplica_puntos    = models.BooleanField(default=False)
   cantidad_puntos  = models.IntegerField(null=True)
   en_oferta        = models.BooleanField(default=False)
@@ -39,9 +41,9 @@ class Producto(models.Model):
   
   #claves foraneas
   evento_ID                = models.ForeignKey(Evento, null=True, on_delete = models.CASCADE)
-  presentacion_Producto_ID = models.ForeignKey(Presentacion_Producto, null=True, on_delete = models.CASCADE)
-  tipo_producto_ID         = models.ForeignKey(Tipo_Producto, null=True, on_delete = models.CASCADE)
-  es_elimidado             = models.BooleanField(default=False)
+  presentacion_Producto_ID = models.ForeignKey(Presentacion_Producto, null=False, on_delete = models.CASCADE)
+  tipo_producto_ID         = models.ForeignKey(Tipo_Producto, null=False, on_delete = models.CASCADE)
+  es_elimidado             = models.BooleanField(default=False, null=False)
 
   def __str__(self) -> str:
     return str(self.id)
