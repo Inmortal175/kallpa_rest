@@ -7,6 +7,7 @@ from api_rest.views.views import RoleModelViewSet, EstadoModelViewSet
 from ..views.producto_view import ProductoModelViewSet, ProductoPersonalizadoModelViewSet
 from ..views.producto_view import Tipo_ProductoModelViewSet, PrecioProductoPersonalizadoModelViewSet
 from ..views.producto_view import Presentacion_ProductoModelViewSet
+from ..views.producto_view import Imagenes_ProductoModelViewSet, ImagenProductoPersonalizadoModelViewSet
 
 from ..views.evento_view import EventoModelViewSet
 
@@ -28,6 +29,8 @@ router_root.register(prefix='tipo_producto', basename='tipo producto', viewset=T
 router_root.register(prefix='producto_persoanlizado', basename='producto_persoanlizado', viewset=ProductoPersonalizadoModelViewSet)
 router_root.register(prefix='precio_producto_personalizado', basename='precio_producto_personalizado', viewset=PrecioProductoPersonalizadoModelViewSet)
 router_root.register(prefix='presentacion_Producto', basename='presentacion_producto', viewset=Presentacion_ProductoModelViewSet)
+router_root.register(prefix='imagen_producto', basename='imagen_producto', viewset=Imagenes_ProductoModelViewSet)
+router_root.register(prefix='imagen_producto_personalizado', basename='imagen_producto_personalizado', viewset=ImagenProductoPersonalizadoModelViewSet)
 # sobre el comentario las rutas del producto
 
 from django.urls import path, include
