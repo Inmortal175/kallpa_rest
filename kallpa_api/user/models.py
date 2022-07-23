@@ -33,8 +33,8 @@ class User(AbstractUser):
   id_rol = models.ForeignKey(role, on_delete=models.CASCADE, blank = True, null=True) 
   es_validado = models.BooleanField(default=False)
 
-  # USERNAME_FIELD = 'email'
-  # REQUIRED_FIELDS = []
+  USERNAME_FIELD = 'email'
+  REQUIRED_FIELDS = []
 
   def __str__(self):  
     return str(self.id)

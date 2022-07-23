@@ -1,3 +1,4 @@
+from tkinter import N
 from django.db import models
 
 # others imports
@@ -7,7 +8,7 @@ from ..Models.evento import Evento
 from user.models import User #user
 
 class Presentacion_Producto(models.Model):
-  id = models.IntegerField(primary_key=True, unique=True, db_index=True)
+  descripcion = models.CharField(max_length=255, blank=True, null=True)
 
   def __str__(self) -> str:
     return str(self.id)
