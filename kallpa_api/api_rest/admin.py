@@ -4,7 +4,8 @@ from django.contrib import admin
 
 from .models import dispositivo, marca, modelo, role, estado
 
-from .Models.productos import Presentacion_Producto
+from .Models.productos import Presentacion_Producto, Tipo_Producto
+from .Models.productos import ImagenProductoPersonalizado, Imagenes_Producto
 
 # Register your models here.
 @admin.register(dispositivo)
@@ -29,5 +30,17 @@ class estadoAdmin(admin.ModelAdmin):
 
 @admin.register(Presentacion_Producto)
 class Presentacion_ProductoAdmin(admin.ModelAdmin):
-  list_display = ['id', 'img_normal', 'img_miniatura']
+  list_display = ['id']
+
+@admin.register(Imagenes_Producto)
+class Imagenes_productoAdmin(admin.ModelAdmin):
+  list_display = ['id', 'Presentacion_Producto_ID', 'imagen_normal', 'imagen_miniatura']
+
+@admin.register(ImagenProductoPersonalizado)
+class ImagenProductoPersonalizadoAdmin(admin.ModelAdmin):
+  list_display = ['id', 'ProductoPersonalizado_ID', 'imagen_personalizado']
+
+@admin.register(Tipo_Producto)
+class Tipo_ProductoAdmin(admin.ModelAdmin):
+  list_display = ['id']
 

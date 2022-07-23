@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 
 # others imports
@@ -8,9 +7,15 @@ from ..Models.evento import Evento
 from user.models import User #user
 
 class Presentacion_Producto(models.Model):
-  img_normal    = models.ImageField(upload_to='img/productos', blank=True)
-  img_miniatura = models.ImageField(upload_to='img/productos', blank=True)
-  es_elimidado  = models.BooleanField(default=False)
+  id = models.IntegerField(primary_key=True, unique=True, db_index=True)
+
+  def __str__(self) -> str:
+    return str(self.id)
+
+class Imagenes_Producto(models.Model):
+  Presentacion_Producto_ID = models.ForeignKey(Presentacion_Producto, null=False, on_delete = models.CASCADE)
+  imagen_normal = models.ImageField(upload_to = 'img/productos', blank=False)
+  imagen_miniatura = models.ImageField(upload_to = 'img/productos', blank=False)
 
   def __str__(self) -> str:
     return str(self.id)
@@ -23,9 +28,9 @@ class Tipo_Producto(models.Model):
     return str(self.id)
 
 class Producto(models.Model):
-  dispositivo_ID   = models.ForeignKey(dispositivo, on_delete=models.CASCADE)
-  marca_ID         = models.ForeignKey(marca, on_delete=models.CASCADE)
-  modelo_ID        = models.ForeignKey(modelo, on_delete=models.CASCADE)
+  dispositivo_ID   = models.ForeignKey(dispositivo, on_delete=models.CASCADE, null = False)
+  marca_ID         = models.ForeignKey(marca, on_delete=models.CASCADE, null = False)
+  modelo_ID        = models.ForeignKey(modelo, on_delete=models.CASCADE, null = False)
   nombre_producto  = models.CharField(max_length=255, null=False)
   descripcion      = models.TextField(null=True)
   precio           = models.FloatField(null= False)
@@ -40,7 +45,7 @@ class Producto(models.Model):
   envio_gratis     = models.BooleanField(default=False)
   
   #claves foraneas
-  evento_ID                = models.ForeignKey(Evento, null=True, on_delete = models.CASCADE)
+  evento_ID                = models.ForeignKey(Evento, null=False, on_delete = models.CASCADE)
   presentacion_Producto_ID = models.ForeignKey(Presentacion_Producto, null=False, on_delete = models.CASCADE)
   tipo_producto_ID         = models.ForeignKey(Tipo_Producto, null=False, on_delete = models.CASCADE)
   es_elimidado             = models.BooleanField(default=False, null=False)
@@ -49,21 +54,28 @@ class Producto(models.Model):
     return str(self.id)
 
 class PrecioProductoPersonalizado(models.Model):
-  dispositivo_ID   = models.ForeignKey(dispositivo, null=True, on_delete = models.CASCADE) # a que dispositivo aplica
-  Empleado_ID      = models.ForeignKey(User, null=True, on_delete = models.CASCADE) # empleado quien modifico el precio
+  dispositivo_ID   = models.ForeignKey(dispositivo, null=False, on_delete = models.CASCADE) # a que dispositivo aplica
+  Empleado_ID      = models.ForeignKey(User, null=False, on_delete = models.CASCADE) # empleado quien modifico el precio
   precio           = models.FloatField(null=False, unique=True) #precio para dispositivo selecionado
   
   def __str__(self) -> str:
     return str(self.precio)
 
 class ProductoPersonalizado(models.Model):
-  dispositivo_ID   = models.ForeignKey(dispositivo,  null=True, on_delete = models.CASCADE)
-  marca_ID         = models.ForeignKey(marca, null=True, on_delete = models.CASCADE)
-  modelo_ID        = models.ForeignKey(modelo, null=True, on_delete = models.CASCADE)
-  client_ID        = models.ForeignKey(User, null=True, on_delete = models.CASCADE) #user created client
-  tipo_producto_ID = models.ForeignKey(Tipo_Producto, null=True, on_delete = models.CASCADE)
+  dispositivo_ID   = models.ForeignKey(dispositivo,  null=False, on_delete = models.CASCADE)
+  marca_ID         = models.ForeignKey(marca, null=False, on_delete = models.CASCADE)
+  modelo_ID        = models.ForeignKey(modelo, null=False, on_delete = models.CASCADE)
+  client_ID        = models.ForeignKey(User, null=False, on_delete = models.CASCADE) #user created client
+  tipo_producto_ID = models.ForeignKey(Tipo_Producto, null=False, on_delete = models.CASCADE)
   precio           = models.ForeignKey(PrecioProductoPersonalizado, null=True, on_delete = models.CASCADE)
   created_at       = models.DateTimeField(auto_created= True, auto_now_add=True)
   es_elimidado     = models.BooleanField(default=False)
+  def __str__(self) -> str:
+    return str(self.id)
+
+class ImagenProductoPersonalizado(models.Model):
+  ProductoPersonalizado_ID = models.ForeignKey(ProductoPersonalizado, null=False, blank=False, on_delete=models.CASCADE)
+  imagen_personalizado = models.ImageField(upload_to= 'img/ productos/personalizado', blank=True)
+  
   def __str__(self) -> str:
     return str(self.id)

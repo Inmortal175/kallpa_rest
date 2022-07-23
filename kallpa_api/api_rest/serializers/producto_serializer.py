@@ -2,6 +2,7 @@ from  rest_framework.serializers import ModelSerializer
 
 from ..Models.productos import Producto, PrecioProductoPersonalizado, ProductoPersonalizado
 from ..Models.productos import Tipo_Producto, Presentacion_Producto
+from ..Models.productos import Imagenes_Producto, ImagenProductoPersonalizado
 
 #serializers para productos
 class ProductoSerializer(ModelSerializer):
@@ -32,4 +33,14 @@ class Tipo_ProductoSerializer(ModelSerializer):
 class Presentacion_ProductoSerializer(ModelSerializer):
   class Meta:
     model = Presentacion_Producto
+    fields = '__all__'
+
+class Imagenes_ProductoSerializer(ModelSerializer):
+  class Meta:
+    model = Imagenes_Producto
+    fields = '__all__'
+
+class ImagenProductoPersonalizadoSerializer(ModelSerializer):
+  class Meta:
+    model = ImagenProductoPersonalizado
     fields = '__all__'
