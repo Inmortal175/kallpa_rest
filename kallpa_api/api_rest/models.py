@@ -19,7 +19,8 @@ class marca(models.Model):
 
 class modelo(models.Model):
   nombre_modelo = models.CharField(max_length=30, unique=True)
-  id_marca = models.ForeignKey(marca, models.CASCADE)
+  id_marca = models.ForeignKey(marca, on_delete = models.CASCADE)
+  id_modelo = models.ForeignKey(dispositivo, on_delete = models.CASCADE)
   es_elimidado = models.BooleanField(default=False)
 
   def __str__(self) -> str:

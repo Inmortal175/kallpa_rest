@@ -24,9 +24,9 @@ class ModeloSerializer(ModelSerializer):
 class RoleSerializer(ModelSerializer):
   class Meta:
     model = role
-    fields = ['id', 'role_value']
+    fields = '__all__'
 
 class EstadoSerializer(ModelSerializer):
   class Meta:
     model = estado
-    fields = ['id', 'nombre_estado']
+    fields = '__all__'

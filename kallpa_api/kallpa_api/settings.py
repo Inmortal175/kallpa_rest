@@ -102,7 +102,7 @@ DATABASES = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME' : 'kallpa_database[4y5t854d4fra4s5c3a]',
         'USER' : 'postgres',
-        'PASSWORD' : 'Jhony125',
+        'PASSWORD' : '5t-3013S',
         'HOST' : 'localhost',
         'PORT' : '5432'
     }
